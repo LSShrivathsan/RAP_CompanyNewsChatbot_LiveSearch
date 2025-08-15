@@ -20,9 +20,38 @@ An interactive **Streamlit** app that can:
    - **Quick bullet points**  
 
 3. **Chatbot Mode**  
-   - Have a natural conversation.  
+   - Have a natural conversation.
+   - Maintains conversation history for context. 
 ---
 
+## 🛠️ Tech Stack
+
+### **Frontend / App Framework**
+- **[Streamlit](https://streamlit.io/)**
+  - Handles the entire UI, input forms, and live updating components.
+  - `st.cache_resource` caches the model so it doesn't reload on every run.
+  - `st.chat_input` and live `placeholder.markdown` enable streaming responses.
+
+### **Web Scraping**
+- **[requests](https://docs.python-requests.org/)** for HTTP requests.
+- **[BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/)** for parsing HTML.
+- We scrape **Bing News Search** results with a custom query (sorted by newest first).
+- Headlines and links are extracted via multiple CSS selectors for robustness.
+- Full articles are fetched and the text is extracted from `<p>` tags.
+
+### **AI Model**
+- **[Qwen/Qwen3-14B-FP8](https://huggingface.co/Qwen/Qwen3-14B-FP8)** from Hugging Face.
+  - Large-scale **language model** optimised for inference in FP8 format.
+  - Runs with `torch.bfloat16` or `torch.float16` depending on GPU support.
+  - Hugging Face **transformers** pipeline for quick text generation.
+  - **TextIteratorStreamer** for token-by-token streaming.
+
+**Why Qwen/Qwen3-14B-FP8?**
+- High-quality, general-purpose language capabilities.
+- FP8 weights make it more memory-efficient.
+- Supports multi-turn conversations and summarization tasks.
+
+---
 ## 🛠 Tools & Libraries Used
 
 | Tool/Library | Purpose |
@@ -39,7 +68,7 @@ An interactive **Streamlit** app that can:
 ## 🔍 How It Works
 
 ### 1. **Searching for News**
-- User enters a company name (e.g., `"Tesla"`).
+- User enters a company name (e.g., `"Zoho"`).
 - The app sends a **Bing News search request** with the query formatted as:  
   ```
   https://www.bing.com/news/search?q={company}+latest+news&qft=sortbydate='1'
