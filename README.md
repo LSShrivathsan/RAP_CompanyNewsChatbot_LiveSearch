@@ -27,20 +27,20 @@ An interactive **Streamlit** app that can:
 ## 🛠️ Tech Stack
 
 ### **Frontend / App Framework**
-- **[Streamlit](https://streamlit.io/)**
+- **Streamlit**
   - Handles the entire UI, input forms, and live updating components.
   - `st.cache_resource` caches the model so it doesn't reload on every run.
   - `st.chat_input` and live `placeholder.markdown` enable streaming responses.
 
 ### **Web Scraping**
-- **[requests](https://docs.python-requests.org/)** for HTTP requests.
-- **[BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/)** for parsing HTML.
+- **requests** for HTTP requests.
+- **BeautifulSoup** for parsing HTML.
 - We scrape **Bing News Search** results with a custom query (sorted by newest first).
 - Headlines and links are extracted via multiple CSS selectors for robustness.
 - Full articles are fetched and the text is extracted from `<p>` tags.
 
 ### **AI Model**
-- **[Qwen/Qwen3-14B-FP8](https://huggingface.co/Qwen/Qwen3-14B-FP8)** from Hugging Face.
+- **Qwen/Qwen3-14B-FP8** from Hugging Face.
   - Large-scale **language model** optimised for inference in FP8 format.
   - Runs with `torch.bfloat16` or `torch.float16` depending on GPU support.
   - Hugging Face **transformers** pipeline for quick text generation.
@@ -56,12 +56,12 @@ An interactive **Streamlit** app that can:
 
 | Tool/Library | Purpose |
 |--------------|---------|
-| **[Streamlit](https://streamlit.io/)** | Interactive web app interface |
-| **[BeautifulSoup4](https://www.crummy.com/software/BeautifulSoup/)** | HTML parsing for Bing News scraping |
-| **[Requests](https://docs.python-requests.org/)** | Fetching Bing News search results & article pages |
-| **[HuggingFace Transformers](https://huggingface.co/docs/transformers)** | Loading and running the Qwen model |
-| **[Qwen/Qwen3-8B-FP8](https://huggingface.co/Qwen/Qwen3-8B-FP8)** | Large language model for summarization & chatbot responses |
-| **[urllib.parse.quote](https://docs.python.org/3/library/urllib.parse.html#urllib.parse.quote)** | Encoding search queries for URLs |
+| **Streamlit** | Interactive web app interface |
+| **BeautifulSoup4** | HTML parsing for Bing News scraping |
+| **Requests** | Fetching Bing News search results & article pages |
+| **HuggingFace Transformers** | Loading and running the Qwen model |
+| **Qwen/Qwen3-8B-FP8** | Large language model for summarization & chatbot responses |
+| **urllib.parse.quote** | Encoding search queries for URLs |
 
 ---
 
@@ -119,6 +119,11 @@ streamlit
 beautifulsoup4
 requests
 transformers
+torch
+sentencepiece
+accelerate
+safetensors
+urllib3
 ```
 
 ---
